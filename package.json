@@ -10,14 +10,17 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.20.0",
+    "parcel-bundler": "^1.12.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "parcel build ./index.html --out-dir build",
+    "start": "node server.ts",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
