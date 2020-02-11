@@ -17,6 +17,11 @@ body {
   width: 100%;
 }
 
+#calendar tr.weekly, #calendar tbody.weekly{
+  grid-template-columns: repeat(8, 1fr);
+}
+
+
 caption {
   text-align: center;
   grid-column: 1 / -1;
@@ -54,6 +59,10 @@ caption {
   min-height: 180px;
   display: flex;
   flex-direction: column;
+}
+
+#calendar .weekly td {
+  min-height:50px;
 }
 
 #calendar .days li:hover {
@@ -117,6 +126,8 @@ caption {
   #calendar tr {
     grid-column: 1 / 2;
   }
+
+  #calendar 
   #calendar .date {
     align-self: flex-start;
   }

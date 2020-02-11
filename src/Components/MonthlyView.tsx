@@ -1,25 +1,19 @@
 import React from 'react'
-
 import { daysInMonth } from '../Utils/Date'
 import ControlView from './ControlView';
 
 interface IProps {
-    date : Date
+    year : number,
+    month : number,
 }
 
-const MonthlyView : React.SFC<IProps>= ({date:current})=>{
-    console.log(current)
+const MonthlyView : React.SFC<IProps>= ({year:currentYear, month:currentMonth})=>{
     const VISABLE_WEEKS = 5;
-    // const current = new Date();
-    const currentMonth = current.getMonth();
-    const currentYear = current.getFullYear();
     let firstDay = (new Date(currentYear, currentMonth)).getDay();
     let _date = 1;
 
     return (
-        <table id={"calendar"}>
-            <caption>August 2014</caption>
-            {/* <ControlView/> */}
+        <>
             <tr className={"weekdays"}>
                 <th scope="col">Sunday</th>
                 <th scope="col">Monday</th>
@@ -46,7 +40,7 @@ const MonthlyView : React.SFC<IProps>= ({date:current})=>{
                     })}
                 </tr>
             ))}
-        </table>
+        </>
     )
 }
 
