@@ -32,7 +32,7 @@ const App = () => {
 
 	const prevHandler = ()=>{
 		if(isMonthlyView()){
-			if(_month === 0) {
+			if(month === 0) {
 				setDate({
 					...currentDate,
 					month : 11 ,
@@ -58,7 +58,7 @@ const App = () => {
 
 	const nextHandler = ()=>{
 		if(isMonthlyView()){
-			if(_month === 11) {
+			if(month === 11) {
 				setDate({
 					...currentDate,
 					month : 0,
