@@ -5,17 +5,16 @@ import { EventContext, getEvents } from '../../context/EventContext'
 import { ViewType } from '../../types'
 
 
-const AppContainer = ()=>{
+const AppContainer: React.SFC = ()=>{
 
     const { viewType } = useContext(ViewContext);
     const { event, dispatch } = useContext(EventContext)
 
-    useEffect(async() => {
+    useEffect(async ():Promise<any> => {
         await getEvents(dispatch)
     }, [dispatch])
 
     console.log(event)
-
     /**
      * Event Context
      */    

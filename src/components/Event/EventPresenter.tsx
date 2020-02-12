@@ -9,14 +9,16 @@ type IProps {
 
 const EventPresenter: React.SFC<IProps> = ({startTime, title, id, onDragStart}) => {
     return (
-        <div draggable={true} onDragStart={onDragStarts} id={id}>
-            <div className="event">
-                <div className="event-time">
-                    1:00pm
+        <div 
+            className="event" 
+            draggable={true} 
+            onDragStart={onDragStart} 
+            id={id}>
+            <div className="event-time">
+                {startTime++}시
             </div>
-                <div className="event-desc">
-                    HTML 5 lecture with Brad Traversy from Eduonix
-            </div>
+            <div className="event-desc">
+                {title}
             </div>
         </div>
     )

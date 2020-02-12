@@ -1,16 +1,17 @@
 import React, { useContext } from 'react'
-import { daysInMonth } from '../Utils/Date';
-import EventItem from './EventItem'
-import { WeekDays } from '../types';
-import { ViewContext } from '../context/ViewContext'
+import { daysInMonth } from '../../Utils/Date';
+import Event from '../Event'
+import { WeekDays } from '../../types';
+import { ViewContext } from '../../context/ViewContext'
 
 interface IProps {
     currentDate: Date,
     onDragOver : Function,
     onDrop:Funtion,
+    data: Array,
 }
 
-const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop})=>{
+const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop, data})=>{
 
     const VISABLE_WEEKS = 5;
     const MILLISECS_IN_DAY = 1000 * 60 * 60 * 24;
@@ -32,15 +33,32 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop})=
             </tr>
         </>
     )     
+
     
     const TDateCell = ({week, day})=>{
-        
+
+        let _currentYearInt = _currentDate.getFullYear();
         let _currentMonthInt = _currentDate.getMonth();
         let _currentDateInt = _currentDate.getDate();
-        _currentDate.setTime(_currentDate.getTime() + MILLISECS_IN_DAY)
+        _currentDate.setTime(_currentDate.getTime() + MILLISECS_IN_DAY);
+
+        let _currentEvents = false;
+        if(data){
+            _currentEvents = data.filter((item)=>{
+                return (
+                    _currentYearInt === item.year && 
+                    _currentMonthInt === item.month && 
+                    _currentDateInt === item.date
+                )
+            })
+        }
 
         return(
-            <td className={`day`} 
+            <td 
+                className={`day`} 
+                data-year={_currentYearInt}
+                data-month={_currentMonthInt}
+                data-date={_currentDateInt}
                 key={`${week}-${day}`} 
                 onDragOver={onDragOver} 
                 onDrop={onDrop}>
@@ -50,6 +68,10 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop})=
                         : _currentDateInt
                     }
                 </div>
+                {_currentEvents.length 
+                    ? _currentEvents.map(item=><Event data={item}/>
+                    :''
+                }
             </td>
         )
     }

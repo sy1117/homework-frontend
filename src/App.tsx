@@ -5,7 +5,7 @@ import { EventProvider } from './context/EventContext'
 import App from './components/App'
 import { ViewType } from './types'
 
-const _App = ()=>{
+const _App:React.SFC = ()=>{
 
 	return (
 		<ViewProvider>

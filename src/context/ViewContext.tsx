@@ -9,8 +9,7 @@ export const ViewContext = React.createContext({
     isMonthlyView : ()=>{}
 });
 
-
-export const ViewProvider = ({children})=>{
+export const ViewProvider:React.SFC = ({children})=>{
     /**
      * View Context 
      */
@@ -20,8 +19,8 @@ export const ViewProvider = ({children})=>{
         setCurrentDate(new Date());
         setView(viewType === ViewType.MONTHLY ? ViewType.WEEKLY : ViewType.MONTHLY)
     }
-    const changeDate = (date)=>setCurrentDate(date)
-    let value = { currentDate, viewType, changeView, changeDate };
+    const changeDate= (date:any)=>setCurrentDate(date)
+    let value:any= { currentDate, viewType, changeView, changeDate };
 
     return (
         <ViewContext.Provider value={value}>
