@@ -30,6 +30,11 @@ caption {
   padding: 10px 0;
 }
 
+caption .view-toggle {
+  float:right;
+}
+
+
 #calendar a {
   color: #8e352e;
   text-decoration: none;

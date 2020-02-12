@@ -1,16 +1,10 @@
 import React from 'react'
-import { getWeek } from '../utils/Date';
-import { WeekDays } from '../types';
-import EventItem from './EventItem'
+import { getWeek } from '../../utils/Date';
+import { WeekDays } from '../../types';
+import Event from '../Event'
 
-interface IProps {
-    year : number,
-    month : number,
-    date : number,
-}
-
-const WeeklyView : React.SFC<IProps> = ({year, month, date})=>{
-    const [ firstday, lastday ] = getWeek(new Date(year, month, date));
+const WeeklyPresenter : React.SFC<IProps> = ({currentDate, onDragOver, onDrop})=>{
+    const [ firstday, lastday ] = getWeek(currentDate);
     let _date = new Date(firstday);
 
     const THead = ()=>(
@@ -30,18 +24,14 @@ const WeeklyView : React.SFC<IProps> = ({year, month, date})=>{
         </tr>
     )
 
-    const dropHandler = (e)=>{
-        e.preventDefault();
-        console.log("drop", e.dataTransfer.getData("text"));
-    }
-
-    const dragOverHandler = (e)=>{
-        e.preventDefault();
-    }
-
     const TDateHourCell = ({date, day, hours})=>(
-        <td scope="col" className={"day"} key={day} onDragOver={dragOverHandler} onDrop={dropHandler}>
-            <EventItem id={`t-${date}-${day}`}/>
+        <td 
+            scope="col" 
+            className={"day"} 
+            key={day} 
+            onDragOver={onDragOver} 
+            onDrop={onDrop}>
+            {/* <EventItem id={`t-${date}-${day}`}/> */}
         </td>
     )
 
@@ -73,4 +63,4 @@ const WeeklyView : React.SFC<IProps> = ({year, month, date})=>{
     )
 }
 
-export default WeeklyView;
+export default WeeklyPresenter;

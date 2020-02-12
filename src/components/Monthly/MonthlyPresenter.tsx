@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { daysInMonth } from '../Utils/Date';
 import EventItem from './EventItem'
 import { WeekDays } from '../types';
+import { ViewContext } from '../context/ViewContext'
 
 interface IProps {
-    year : number,
-    month : number,
+    currentDate: Date,
+    onDragOver : Function,
+    onDrop:Funtion,
 }
 
-const MonthlyView : React.SFC<IProps>= ({year:currentYear, month:currentMonth})=>{
+const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop})=>{
+
+    const VISABLE_WEEKS = 5;
+    const MILLISECS_IN_DAY = 1000 * 60 * 60 * 24;
+    let year = currentDate.getFullYear(), month = currentDate.getMonth()
+
+    let _startDay = (new Date(year, month)).getDay();
+    let _currentDate = new Date( (new Date(year, month, 1)) - MILLISECS_IN_DAY * (_startDay))
     
     const THead = ()=>(
         <>
@@ -22,43 +31,28 @@ const MonthlyView : React.SFC<IProps>= ({year:currentYear, month:currentMonth})=
                 <th scope="col">Saturday</th>
             </tr>
         </>
-    )
-
-    const dropHandler = (e)=>{
-        e.preventDefault();
-        console.log("drop", e.dataTransfer.getData("text"));
-    }
-
-    const dragOverHandler = (e)=>{
-        e.preventDefault();
-    }
-
-        
-    const VISABLE_WEEKS = 5;
-    const MILLISECS_IN_DAY = 1000 * 60 * 60 * 24;
-    let _startDay = (new Date(currentYear, currentMonth)).getDay();
-    let _currentDate = new Date( (new Date(currentYear, currentMonth, 1)) - MILLISECS_IN_DAY * (_startDay))
+    )     
     
     const TDateCell = ({week, day})=>{
         
         let _currentMonthInt = _currentDate.getMonth();
         let _currentDateInt = _currentDate.getDate();
-        // set to Next Day
         _currentDate.setTime(_currentDate.getTime() + MILLISECS_IN_DAY)
 
         return(
             <td className={`day`} 
                 key={`${week}-${day}`} 
-                onDragOver={dragOverHandler} 
-                onDrop={dropHandler}>
+                onDragOver={onDragOver} 
+                onDrop={onDrop}>
                 <div className={"date"}>
-                    {_currentDateInt}
+                    {_currentDateInt === 1 
+                        ? `${_currentMonthInt+1}/${_currentDateInt}`
+                        : _currentDateInt
+                    }
                 </div>
-                <EventItem id={"tes"}/>    
             </td>
         )
     }
-
 
     const TBody = ()=>(
         <tbody>
@@ -70,7 +64,6 @@ const MonthlyView : React.SFC<IProps>= ({year:currentYear, month:currentMonth})=
         </tbody>
     )
         
-
     return (
         <>
             <THead/>
@@ -79,4 +72,4 @@ const MonthlyView : React.SFC<IProps>= ({year:currentYear, month:currentMonth})=
     )
 }
 
-export default MonthlyView 
+export default MonthlyPresenter 

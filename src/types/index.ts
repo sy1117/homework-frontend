@@ -1,5 +1,6 @@
+
 export enum ViewType {
-    MONTHLY, WEEKLY
+	MONTHLY, WEEKLY
 }
 
 export enum MonthList {
