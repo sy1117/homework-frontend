@@ -27,7 +27,6 @@ const PopupContainer : React.SFC = ({})=>{
 
     const deleteHandler = async(e, formData)=>{
         let { id } = formData;
-        console.
         await deleteEvent(id)(dispatch);
         close();
     }

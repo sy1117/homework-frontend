@@ -6,11 +6,12 @@ import Event from '../EventItem'
 interface IProps {
     currentDate: Date,
     onDragOver : Function,
+    onCellClick: Function,
     onDrop:Funtion,
     data: Array,
 }
 
-const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onDragOver, onDrop})=>{
+const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onCellClick, onDragOver, onDrop})=>{
     const [ firstday, lastday ] = getWeek(currentDate);
     let _date = new Date(firstday);
 
@@ -18,7 +19,6 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onDragOver, onD
     let _currentDateArr = [0,1,2,3,4,5,6].map((day)=>{
         return new Date(new Date(firstday).getTime() + day * MILLISECS_IN_DAY)
     })
-
 
     const THead = ()=>(
         <tr className={"weekly weekdays"}>
@@ -48,7 +48,7 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onDragOver, onD
         let _currentEvents = false;
         if(data){
             _currentEvents = data.filter(item=>{
-                let dateObj = new Date(item.datetime);
+                let dateObj = new Date( item.datetime);
                 return (
                     _currentYearInt === dateObj.getFullYear() && 
                     _currentMonthInt === dateObj.getMonth() && 
@@ -66,6 +66,7 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onDragOver, onD
                 data-month = {_currentMonthInt}
                 data-date = {_currentDateInt}
                 data-hours={_currentHoursInt}
+                onClick={onCellClick}
                 onDragOver={onDragOver} 
                 onDrop={onDrop}>
                     {_currentEvents.length ?

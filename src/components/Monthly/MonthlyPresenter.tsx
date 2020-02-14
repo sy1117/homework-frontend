@@ -43,6 +43,8 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
         let _currentDateInt = _currentDate.getDate();
         _currentDate.setTime(_currentDate.getTime() + MILLISECS_IN_DAY);
 
+
+        // [todo] filtering 개선
         let _currentEvents = false;
         if(data){
             _currentEvents = data.filter((item)=>{
@@ -52,7 +54,11 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
                     _currentMonthInt === dateObj.getMonth() && 
                     _currentDateInt === dateObj.getDate()
                 )
-            })
+            }).sort(function (a, b) { 
+                let ahours = new Date(a.datetime).getHours();
+                let bhours = new Date(b.datetime).getHours();
+                return ahours - bhours  
+            });
         }
 
         return(

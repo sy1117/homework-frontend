@@ -14,9 +14,25 @@ const MonthlyContainer:React.SFC = ()=>{
         e.preventDefault();
 
         let data = JSON.parse(e.dataTransfer.getData('text'))
-        let { id, hours } = data;
+        let { id, datetime } = data;
         let {currentTarget:{dataset:{year,month,date}}} = e;
 
+
+        /**
+         * 같은 날짜인 경우, 이동 x
+         */
+        let originDate = new Date(datetime);
+        let hours = originDate.getHours();
+
+        if(
+            originDate.getDate()==parseInt(date) && 
+            originDate.getMonth()==parseInt(month) && 
+            originDate.getFullYear()== parseInt(year)
+        ) return false;
+        
+        /**
+         * 날짜 확인
+         */
         let result = confirm(`${year}/${parseInt(month)+1}/${date}로 일정을 옮기시겠습니까?`);
         let datetime = new Date(year,month,date,hours).toISOString();
 
