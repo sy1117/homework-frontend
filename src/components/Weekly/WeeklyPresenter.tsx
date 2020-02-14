@@ -1,11 +1,24 @@
 import React from 'react'
 import { getWeek } from '../../utils/Date';
 import { WeekDays } from '../../types';
-import Event from '../Event'
+import Event from '../EventItem'
 
-const WeeklyPresenter : React.SFC<IProps> = ({currentDate, onDragOver, onDrop})=>{
+interface IProps {
+    currentDate: Date,
+    onDragOver : Function,
+    onDrop:Funtion,
+    data: Array,
+}
+
+const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onDragOver, onDrop})=>{
     const [ firstday, lastday ] = getWeek(currentDate);
     let _date = new Date(firstday);
+
+    const MILLISECS_IN_DAY = 1000 * 60 * 60 * 24;
+    let _currentDateArr = [0,1,2,3,4,5,6].map((day)=>{
+        return new Date(new Date(firstday).getTime() + day * MILLISECS_IN_DAY)
+    })
+
 
     const THead = ()=>(
         <tr className={"weekly weekdays"}>
@@ -24,24 +37,58 @@ const WeeklyPresenter : React.SFC<IProps> = ({currentDate, onDragOver, onDrop})=
         </tr>
     )
 
-    const TDateHourCell = ({date, day, hours})=>(
-        <td 
-            scope="col" 
-            className={"day"} 
-            key={day} 
-            onDragOver={onDragOver} 
-            onDrop={onDrop}>
-            {/* <EventItem id={`t-${date}-${day}`}/> */}
-        </td>
-    )
+    const TDateHourCell = ({day, hours}:{day:number, hours:number})=>{
+
+        let _currentDate = _currentDateArr[day];
+        let _currentYearInt = _currentDate.getFullYear();
+        let _currentMonthInt = _currentDate.getMonth();
+        let _currentDateInt = _currentDate.getDate();
+        let _currentHoursInt = hours;
+
+        let _currentEvents = false;
+        if(data){
+            _currentEvents = data.filter(item=>{
+                let dateObj = new Date(item.datetime);
+                return (
+                    _currentYearInt === dateObj.getFullYear() && 
+                    _currentMonthInt === dateObj.getMonth() && 
+                    _currentDateInt === dateObj.getDate() &&
+                    _currentHoursInt === dateObj.getHours()
+                )
+            })
+        }
+
+        return(
+            <td 
+                scope="col" 
+                className={"day"} 
+                data-year ={_currentYearInt}
+                data-month = {_currentMonthInt}
+                data-date = {_currentDateInt}
+                data-hours={_currentHoursInt}
+                onDragOver={onDragOver} 
+                onDrop={onDrop}>
+                    {_currentEvents.length ?
+                         _currentEvents.map(item=><Event data={item}/>)
+                        : ''
+                    }
+            </td>
+        )
+    }
 
     const THourRow = ({hours})=>(
         <tr className={"weekly"} key={hours}>
             <th scope="col" className={"day"}>{hours} 시</th>
             {[0,1,2,3,4,5,6].map((day)=>{
                 let temp = _date.getDate();
+                // set to next day
                 _date.setDate(_date.getDate() + 1);
-                return (<TDateHourCell date={_date} day={day} hours={hours} key={`date-${day}-${hours}`}/>)
+                return (
+                    <TDateHourCell 
+                        day={day}
+                        hours={hours} 
+                    />
+                )
             })}
         </tr>
     )

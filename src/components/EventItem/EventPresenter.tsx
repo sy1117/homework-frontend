@@ -1,21 +1,24 @@
 import React from 'react'
 
-type IProps {
-    startTime: number!,
-    title: string!,
-    id: number!,
-    onDragStart: Function!
+interface IProps {
+    hours: number,
+    title: string,
+    id: number,
+    onDragStart: Function,
+    onClick :Function,
 }
 
-const EventPresenter: React.SFC<IProps> = ({startTime, title, id, onDragStart}) => {
+const EventPresenter: React.SFC<IProps> = ({datetime, title, id, onDragStart, onClick}) => {
+    let hours = new Date(datetime).getHours();
     return (
         <div 
             className="event" 
             draggable={true} 
+            onClick={onClick}
             onDragStart={onDragStart} 
             id={id}>
             <div className="event-time">
-                {startTime++}시
+                {hours}시
             </div>
             <div className="event-desc">
                 {title}

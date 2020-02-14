@@ -4,13 +4,16 @@ import { ViewProvider } from './context/ViewContext'
 import { EventProvider } from './context/EventContext'
 import App from './components/App'
 import { ViewType } from './types'
+import { PopupProvider } from './context/PopupContext';
 
 const _App:React.SFC = ()=>{
 
 	return (
 		<ViewProvider>
 			<EventProvider>
-				<App/>
+				<PopupProvider>
+					<App/>
+				</PopupProvider>
 			</EventProvider>
 		</ViewProvider>
 	)

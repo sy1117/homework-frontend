@@ -27,3 +27,8 @@ export enum WeekDays {
 	Friday ,
 	Saturday,
 }
+
+export enum PopupMode {
+    ADD_EVENT,
+    EDIT_EVENT
+}

@@ -1,17 +1,18 @@
 import React, { useContext } from 'react'
 import { daysInMonth } from '../../Utils/Date';
-import Event from '../Event'
+import Event from '../EventItem'
 import { WeekDays } from '../../types';
 import { ViewContext } from '../../context/ViewContext'
 
 interface IProps {
     currentDate: Date,
+    onClickDate : Function,
     onDragOver : Function,
     onDrop:Funtion,
     data: Array,
 }
 
-const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop, data})=>{
+const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDate, onDrop, data})=>{
 
     const VISABLE_WEEKS = 5;
     const MILLISECS_IN_DAY = 1000 * 60 * 60 * 24;
@@ -45,10 +46,11 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop, d
         let _currentEvents = false;
         if(data){
             _currentEvents = data.filter((item)=>{
+                let dateObj = new Date(item.datetime);
                 return (
-                    _currentYearInt === item.year && 
-                    _currentMonthInt === item.month && 
-                    _currentDateInt === item.date
+                    _currentYearInt === dateObj.getFullYear() && 
+                    _currentMonthInt === dateObj.getMonth() && 
+                    _currentDateInt === dateObj.getDate()
                 )
             })
         }
@@ -60,6 +62,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onDrop, d
                 data-month={_currentMonthInt}
                 data-date={_currentDateInt}
                 key={`${week}-${day}`} 
+                onClick={onClickDate}
                 onDragOver={onDragOver} 
                 onDrop={onDrop}>
                 <div className={"date"}>
