@@ -6,9 +6,11 @@ interface IProps {
     isShown ?: boolean,
     mode ?: PopupMode,
     data ?: any,
+    errorMessage ?: string,
     onCancel ?: Function,
     onSave ?: Function,
     onDelete ?: Function,
+    onDataChange ?: Function,
 }
 
 const PopupPresenter : React.SFC<IProps> = ({
@@ -16,9 +18,11 @@ const PopupPresenter : React.SFC<IProps> = ({
     title,
     date,
     hours,
+    errorMessage,
     onCancel,
     onDelete,
     onSave,
+    onDataChange,
 })=>{
 
     const [formData, setFormData] = useState({
@@ -30,6 +34,7 @@ const PopupPresenter : React.SFC<IProps> = ({
 
 
     const updateField = (e :React.SyntheticEvent)=> {
+        if(onDataChange) onDataChange(e);
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -73,6 +78,7 @@ const PopupPresenter : React.SFC<IProps> = ({
                         value={formData.hours}
                         max={23} min={0}/>:00
                     <br/><br/>
+                    {errorMessage && <div>{errorMessage}</div>}
 
                     <button onClick={handler(onCancel)}>취소</button>
                     { id && <button onClick={handler(onDelete)}>삭제</button>}

@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext, useState } from 'react';
 import axios from 'axios';
 import { stat } from 'fs';
+import { resolve } from 'url';
 
 const initialState = {
     isLoad: null,
@@ -17,18 +18,17 @@ const loadingState = {
 
 // 성공시 상태
 const success = data=> ({
-    isLoad: false,
+    isLoad: true,
     data,
     error: null,
 });
 
 // 실패시 상태
-const error = error => ({
+const error = (data, error) => ({
     isLoad: false,
-    data: null,
+    data,
     error: error,
 });
-
 
 const EventAction =  {
     GET_EVENTS : 'GET_EVENTS',
@@ -59,7 +59,7 @@ export const EventReducer = (state, action)=>{
         case EventAction.GET_EVENTS_SUCCESS:
             return success(action.data);
         case EventAction.GET_EVENTS_ERROR:
-            return error(action.error);
+            return error(state.data, action.error);
 
         /**
          * add event
@@ -70,8 +70,8 @@ export const EventReducer = (state, action)=>{
             state.data[state.data.length] = action.data;
             return success(state.data);
         case EventAction.CREATE_EVENT_ERROR:
-            return error(action.error);
-
+            return error(state.data, action.error);
+            
         /**
          * update
          */
@@ -83,8 +83,7 @@ export const EventReducer = (state, action)=>{
             state.data[idx] = data;
             return success(state.data);
         case EventAction.UPDATE_EVENT_ERROR :
-            return error(action.error);
-
+            return error(state.data, action.error);
 
         /**
          * delete
@@ -97,7 +96,7 @@ export const EventReducer = (state, action)=>{
             state.data.splice(idx, 1)
             return success(state.data);
         case EventAction.DELETE_EVENT_ERROR :
-            return error(action.error);
+            return error(state.data, action.error);
 
         default:
             throw new Error(`Unhandled action type ${action.type}`);
@@ -123,11 +122,13 @@ export const getEvents = async (dispatch)=>{
             type: EventAction.GET_EVENTS_SUCCESS,
             data
         });
+        return new Promise(resolve => {resolve(true)});
     } catch (error) {
         dispatch({
             type: EventAction.GET_EVENTS_ERROR,
             error,
         })
+        return new Promise(resolve => {resolve(false)});
     }   
 }
 
@@ -140,11 +141,13 @@ export const addEvent = (param:any)=> async(dispatch:any)=>{
             type:EventAction.CREATE_EVENT_SUCCESS,
             data
         })
+        return new Promise(resolve => {resolve(true)});
     } catch (error) {
         dispatch({
             type:EventAction.CREATE_EVENT_ERROR,
-            error:error.message
+            error
         })
+        return new Promise(resolve => {resolve(false)});
     }
 }
 
@@ -157,11 +160,13 @@ export const modifyEvent = (id:number, param:any)=> async (dispatch:any)=>{
             type: EventAction.UPDATE_EVENT_SUCCESS,
             data
         })
+        return new Promise(resolve => {resolve(true)});
     } catch (error) {
         dispatch({
             type: EventAction.UPDATE_EVENT_ERROR,
             error,
         })
+        return new Promise(resolve => {resolve(false)});
     }
 }
 
@@ -174,10 +179,13 @@ export const deleteEvent = (id:number)=> async(dispatch:any)=>{
             type: EventAction.DELETE_EVENT_SUCCESS,
             data : {id}
         })
+        return new Promise(resolve => {resolve(true)});
+
     } catch (error) {
         dispatch({
             type: EventAction.DELETE_EVENT_ERROR,
             error,
         })
+        return new Promise(resolve => {resolve(false)});
     }
 }

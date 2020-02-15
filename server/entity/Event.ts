@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeInsert, BeforeUpdate, AfterInsert, AfterUpdate, BaseEntity, Generated} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeInsert, BeforeUpdate, AfterInsert, AfterUpdate, BaseEntity, Generated, Unique} from "typeorm";
 
 @Entity()
+@Unique(["datetime"])
 export class Event extends BaseEntity{
 
     @PrimaryGeneratedColumn()

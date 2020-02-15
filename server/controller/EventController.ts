@@ -1,4 +1,4 @@
-import { getRepository } from "typeorm";
+import { getRepository, Equal, Table } from "typeorm";
 import { NextFunction, Request, Response } from "express";
 import { Event } from "../entity/Event";
 
@@ -16,7 +16,13 @@ export class EventController {
 
     async save(request: Request, response: Response, next: NextFunction) {
         let data = request.body;
-        return this.eventRepository.save(data);
+        try {
+            let res = await this.eventRepository.save(data);
+            return res;
+        } catch (error) {
+            return response.status(409).send(error)
+        }
+        
     }
 
     async modify(request: Request, response: Response, next: NextFunction) {
@@ -26,7 +32,12 @@ export class EventController {
             ...request.body,
         }
         let data = request.body;
-        return this.eventRepository.save(_event);
+        try {
+            let res = await this.eventRepository.save(_event);
+            return res;
+        } catch (error) {
+            return response.status(409).send(error)
+        }
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {

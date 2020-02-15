@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PopupPresenter from './PopupPresenter';
 import { PopupContext } from '../../context/PopupContext';
 import { PopupMode } from '../../types/index';
@@ -18,7 +18,7 @@ const PopupContainer : React.SFC = ({})=>{
     let dateObj = new Date(datetime);
     let date = yyyymmdd(dateObj);
     let hours = id ? dateObj.getHours() : 0 ;
-
+    const [ errorMsg, setErrorMsg] = useState(null);
     const { dispatch } = useContext(EventContext)
 
     const cancelHandler = ()=>{
@@ -31,6 +31,7 @@ const PopupContainer : React.SFC = ({})=>{
         close();
     }
 
+
     const saveHandler = async (e, data)=>{
         let {title, date, hours} = data;
         let datetimeObj = new Date(date);
@@ -41,12 +42,17 @@ const PopupContainer : React.SFC = ({})=>{
         }
         
         if(data.id){
-            await modifyEvent(id, postData)(dispatch);
-            close();
+            let res = await modifyEvent(id, postData)(dispatch);
+            res ? close() : setErrorMsg("해당 일정을 추가할 수 없습니다");
+
         }else{
-            await addEvent(postData)(dispatch);
-            close();
+            let res = await addEvent(postData)(dispatch);
+            res ? close() : setErrorMsg("해당 일정을 추가할 수 없습니다");
         }
+    }
+
+    const dataChangeHandler =(e)=>{
+        setErrorMsg(null)
     }
 
     return isShown &&
@@ -55,9 +61,11 @@ const PopupContainer : React.SFC = ({})=>{
                 title,
                 date,
                 hours,
+                errorMessage:errorMsg,
                 onCancel:cancelHandler,
                 onDelete:deleteHandler,
-                onSave:saveHandler
+                onSave:saveHandler,
+                onDataChange:dataChangeHandler,
             }
         }/>
     
