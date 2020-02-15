@@ -6,7 +6,8 @@
 npm install
 npm start
 ```
-* 개발 
+* 개발 모드
+    - hmd 적용
 ```
 npm dev
 ```
@@ -76,7 +77,7 @@ Event {
 </code></pre>
 
 * [x] Backend REST API 구성 
-    - GET  /events 일정 목록 조회
+    - GET  `/events` 일정 목록 조회
        - Response
             ```
             [
@@ -86,7 +87,7 @@ Event {
                 }, {...},{...}
             ]
             ```
-    - POST /events 일정 생성
+    - POST `/events`일정 생성
         - Request
             ```
             {
@@ -100,7 +101,7 @@ Event {
                 "id" : 2
                 "title" :"meeting",
                 "datetime" :"2020-02-01T15:00:00.000Z",
-                "createdAt" : 
+                "createdAt" : "2020-02-01T15:00:00.000Z"
             }
             ```
     - PATCH `/events/{:id}` 일정 수정
@@ -120,7 +121,7 @@ Event {
                 "createdAt" : :"2020-02-01T15:00:00.000Z"
             }
             ```
-    - DELETE /events/{:id} 일정 삭제
+    - DELETE `/events/{:id}` 일정 삭제
         - Request `/events/1`
         - Response
             ```
@@ -135,21 +136,23 @@ Event {
 - App
     - Control : 캘린더 타입(월/주), 날짜 범위를 버튼을 통해 변경 가능하며, ViewContext 에 반영해준다. 
     - CalendarView : ViewContext 의 캘린더 타입(월/주), 날짜 데이터를 가져와 Monthly 혹은 Weekly 컴포넌트를 통해 보여준다.  
-        - Monthly
-        - Weekly
-    - EventPopup : 이벤트 추가/수정/삭제를 위한 팝업으로, 하나의 팝업으로 구현. 팝업의 open, close 의 함수는 PopupContext 로 접근하여 사용한다. 
+        - Monthly : 월 달력 컴포넌트
+        - Weekly : 주 달력 컴포넌트 
+        - EventItem : 월/주 달력 칸 안에 표시되는 일정 컴포넌트
+    - EventPopup : 일정 추가/수정/삭제를 위한 팝업으로, 하나의 팝업으로 구현. 팝업의 open, close 의 함수는 PopupContext 로 접근하여 사용한다. 
 
 * [x] 주요 기능 구현 
     - [x] 월/주 단위 달력
         - [x] 드래그 드랍을 통한 일정 변경 
             - draggable 속성을 통해 일정 요소의 이동
+            - drag 이벤트 발생 시, `e.dataTransfer = JSON.stringify(eventDataObj)` 를 통해 데이터 전달
         - [x] 팝업을 통한 일정 추가/삭제/수정
-            - [x] 일정 제목, 날짜 및 시간 validation Check 
+            - [x] 일정 제목, 날짜 및 시간 validation Check 는 HTML Validations 기능을 통해 구현
             - [x] 일정 추가/수정 시 날짜/시간 중복 여부의 확인
                 - `Event.datetime` 필드의 제약조건(unique)을 사용하여 중복된 일정인 경우, 서버 에러 발생(`Status Code: 409 Conflict`)
                 - 서버 에러 발생 시, 팝업 내 표출
 
-* [ ] 컴포넌트 단위 테스트 
-    - [ ] Jest 기반의 단위 테스트 작성
+* [x] 컴포넌트 단위 테스트 
+    - [x] Jest 기반의 단위 테스트 작성
 
 

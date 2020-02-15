@@ -1,14 +1,13 @@
 import React from 'react'
 
 interface IProps {
-    hours: number,
+    datetime: Date,
     title: string,
-    id: number,
     onDragStart: Function,
     onClick :Function,
 }
 
-const EventPresenter: React.SFC<IProps> = ({datetime, title, id, onDragStart, onClick}) => {
+const EventPresenter: React.SFC<IProps> = ({datetime, title, onDragStart, onClick}) => {
     let hours = new Date(datetime).getHours();
     return (
         <div 
@@ -16,7 +15,7 @@ const EventPresenter: React.SFC<IProps> = ({datetime, title, id, onDragStart, on
             draggable={true} 
             onClick={onClick}
             onDragStart={onDragStart} 
-            id={id}>
+            >
             <div className="event-time">
                 {hours}시
             </div>

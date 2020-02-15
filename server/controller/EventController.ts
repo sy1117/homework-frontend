@@ -42,7 +42,12 @@ export class EventController {
 
     async remove(request: Request, response: Response, next: NextFunction) {
         let eventToRemove = await this.eventRepository.findOne(request.params.id);
-        return await this.eventRepository.remove(eventToRemove)
+        try {
+            let res = await this.eventRepository.remove(eventToRemove);
+            return res;
+        } catch (error) {
+            return response.status(409).send(error)
+        }
     }
 
     async removeAll(request: Request, response: Response, next: NextFunction) {

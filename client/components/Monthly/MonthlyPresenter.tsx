@@ -78,7 +78,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
                     }
                 </div>
                 {_currentEvents.length 
-                    ? _currentEvents.map(item=><Event data={item} key={`event--${item.id}`}/>
+                    ? _currentEvents.map(item=><Event data={item} key={`event--${item.id}`}/>)
                     :''
                 }
             </td>

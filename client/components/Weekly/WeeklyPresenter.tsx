@@ -45,12 +45,13 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onCellClick, on
         let _currentYearInt = _currentDate.getFullYear();
         let _currentMonthInt = _currentDate.getMonth();
         let _currentDateInt = _currentDate.getDate();
-        let _currentHoursInt = hours;
+        let _currentHoursInt = parseInt(hours);
 
         let _currentEvents = false;
         if(data){
             _currentEvents = data.filter(item=>{
                 let dateObj = new Date( item.datetime);
+                
                 return (
                     _currentYearInt === dateObj.getFullYear() && 
                     _currentMonthInt === dateObj.getMonth() && 

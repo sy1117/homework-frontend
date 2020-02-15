@@ -91,9 +91,9 @@ export const EventReducer = (state, action)=>{
         case EventAction.DELETE_EVENT :
             return state;
         case EventAction.DELETE_EVENT_SUCCESS :
-            let { data : id } = action;
-            let idx = state.data.findIndex(s=>s.id=== id);
-            state.data.splice(idx, 1)
+            let { data : {id} } = action;
+            let deleteIdx = state.data.findIndex(s=>s.id=== id);
+            state.data.splice(deleteIdx, 1)
             return success(state.data);
         case EventAction.DELETE_EVENT_ERROR :
             return error(state.data, action.error);

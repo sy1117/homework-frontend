@@ -8,7 +8,7 @@ const EventContainer =({data}:{data:any})=>{
     let { id, title, datetime } = data;
     const { open } = useContext(PopupContext);
 
-    const onDragStart = (e)=>{
+    const eventDragHandler = (e)=>{
         e.dataTransfer.setData('text', JSON.stringify(data))
     }
 
@@ -20,7 +20,10 @@ const EventContainer =({data}:{data:any})=>{
 
     return <EventPresenter 
         onClick={eventClickHandler} 
-        {... {datetime, title, id, onDragStart}}/>
+        datetime={datetime}
+        title={title}
+        onDragStart={eventDragHandler}
+    />
 }
 
 export default EventContainer;

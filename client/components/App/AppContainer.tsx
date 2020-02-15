@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import AppPresenter from './AppPresenter'
 import { ViewContext } from '../../context/ViewContext'
 import { EventContext, getEvents } from '../../context/EventContext'
-import { ViewType } from '../../types'
 import { PopupContext } from '../../context/PopupContext'
 
 

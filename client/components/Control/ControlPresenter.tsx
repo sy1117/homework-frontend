@@ -1,6 +1,8 @@
 import React from 'react'
 import { getWeek, yyyymmdd } from '../../utils/Date';
 import { ViewType, MonthList } from '../../types'
+import Monthly from '../Monthly'
+import Weekly from '../Weekly'
 
 interface IProps {
     viewType: ViewType, 
@@ -26,6 +28,7 @@ const ControlPresenter = ({
     const isMonthlyView = viewType === ViewType.MONTHLY;
 
     return (
+    <table id={"calendar"}>
         <caption>
             <button onClick={onPrevHandler}>&lt;</button>
             {isMonthlyView
@@ -34,10 +37,12 @@ const ControlPresenter = ({
             }
             <button onClick={onNextHandler}>&gt;</button>
             <div className={"view-toggle"}>
-                <button onClick={onChangeView} disabled={viewType == ViewType.MONTHLY}>월</button>
-                <button onClick={onChangeView} disabled={viewType == ViewType.WEEKLY}>주</button>
+                <button data-testid="btn-monthly" onClick={onChangeView} disabled={viewType == ViewType.MONTHLY}>월</button>
+                <button data-testid="btn-weekly" onClick={onChangeView} disabled={viewType == ViewType.WEEKLY}>주</button>
             </div>
         </caption>
+        {viewType === ViewType.MONTHLY ? <Monthly/> : <Weekly/>}
+    </table>   
     )
 }
 

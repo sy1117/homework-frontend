@@ -3,6 +3,7 @@ import { ViewContext } from '../../context/ViewContext'
 import ControlPresenter from './ControlPresenter'
 import { ViewType } from '../../types';
 
+
 const ControlContainer = ()=>{
 
     const { viewType, currentDate, changeView, changeDate } = useContext(ViewContext);
@@ -34,6 +35,7 @@ const ControlContainer = ()=>{
 	}
 
     return (
+    <>
         <ControlPresenter {...{ 
             viewType, 
             currentDate, 
@@ -41,8 +43,8 @@ const ControlContainer = ()=>{
             onPrevHandler : prevHandler,
             onNextHandler : nextHandler 
         }} />
+    </>
     )
-
 }
 
 export default ControlContainer

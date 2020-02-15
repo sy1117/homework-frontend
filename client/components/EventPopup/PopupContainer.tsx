@@ -17,7 +17,7 @@ const PopupContainer : React.SFC = ({})=>{
     let {id, title, datetime} = data;
     let dateObj = new Date(datetime);
     let date = yyyymmdd(dateObj);
-    let hours = id ? dateObj.getHours() : 0 ;
+    let hours = dateObj.getHours();
     const [ errorMsg, setErrorMsg] = useState(null);
     const { dispatch } = useContext(EventContext)
 

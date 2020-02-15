@@ -3,9 +3,10 @@ import { PopupMode } from '../../types'
 import { yyyymmdd } from '../../utils/Date';
 
 interface IProps {
-    isShown ?: boolean,
-    mode ?: PopupMode,
-    data ?: any,
+    id?:number,
+    title?:string,
+    date:string,
+    hours?:number,
     errorMessage ?: string,
     onCancel ?: Function,
     onSave ?: Function,
@@ -77,6 +78,7 @@ const PopupPresenter : React.SFC<IProps> = ({
                             required
                             />
                         <select
+                            id={"popup_hours"} 
                             name={"hours"} 
                             onChange={updateField}
                             value={formData.hours}>
@@ -89,8 +91,8 @@ const PopupPresenter : React.SFC<IProps> = ({
                         </select>
                         ~ {(parseInt(formData.hours)+1) 시
                     </div>
-                    <div>
-                        {errorMessage && {errorMessage}}
+                    <div className="error_message">
+                        {errorMessage}
                     </div>
                     <div className="popup_btn_area">
                         <button onClick={handler('CANCEL', onCancel)}>취소</button>
