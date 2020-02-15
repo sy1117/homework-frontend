@@ -28,11 +28,10 @@ const PopupContainer : React.SFC = ({})=>{
     const deleteHandler = async(e, formData)=>{
         if(confirm("일정을 삭제하시겠습니까?")){
             let { id } = formData;
-            await deleteEvent(id)(dispatch);
-            close();
+            let res = await deleteEvent(id)(dispatch);
+            res ? close() : alert("일정 삭제에 실패했습니다")
         }
     }
-
 
     const saveHandler = async (e, data)=>{
         let {title, date, hours} = data;

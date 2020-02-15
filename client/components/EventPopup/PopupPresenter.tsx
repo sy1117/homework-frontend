@@ -44,7 +44,8 @@ const PopupPresenter : React.SFC<IProps> = ({
     };
 
     const handler = (action:'CANCEL'|'DELETE'|'SAVE', handlerFunc:Function|undefined) => (e:React.SyntheticEvent)=>{
-        if(action === 'SAVE' && !formRef.current.checkValidity()) return;
+        e.preventDefault();
+        if(action === 'SAVE' && !formRef.current.checkValidity()) return false;
         if(handlerFunc) handlerFunc(e, formData);
     }
 
