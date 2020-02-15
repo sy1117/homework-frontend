@@ -30,8 +30,13 @@ createConnection().then(async connection => {
 
 
     let bundler = new Bundler('./index.html', {
-        outDir: './build'
+        outDir: './build',
+        // minify: process.env.NODE_ENV === 'production' ,
+        // watch : process.env.NODE_ENV !== 'production'
     })
+
+    console.log(process.env.NODE_ENV)
+
     app.use(bundler.middleware())
 
     // setup express app here

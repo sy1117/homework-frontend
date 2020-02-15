@@ -32,7 +32,8 @@
 		"typescript": "~3.7.2"
 	},
 	"scripts": {
-		"start": "ts-node server/index",
+		"start": "cross-env NODE_ENV=production ts-node server/index",
+		"dev": "cross-env NODE_ENV=dev ts-node server/index",
 		"test": "jest"
 	},
 	"eslintConfig": {
@@ -52,29 +53,30 @@
 	},
 	"devDependencies": {
 		"@types/parcel-bundler": "^1.12.1",
+		"cross-env": "^7.0.0",
 		"react-test-renderer": "^16.12.0"
-  },
-  "jest": {
-	"globals": {
-		"ts-jest": {
-		  "diagnostics": false
-		}
 	},
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-	],
-	"moduleNameMapper": {
-		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-		"\\.(css|less)$": "identity-obj-proxy"
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"diagnostics": false
+			}
+		},
+		"transform": {
+			"^.+\\.tsx?$": "ts-jest"
+		},
+		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json",
+			"node"
+		],
+		"moduleNameMapper": {
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(css|less)$": "identity-obj-proxy"
+		}
 	}
-  }
 }

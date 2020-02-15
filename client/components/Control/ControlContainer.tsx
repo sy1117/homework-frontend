@@ -21,7 +21,7 @@ const ControlContainer = ()=>{
             let sevenDaysAgo = new Date(currentDate - SEVEN_DAYS); // 7 days ago
             changeDate(sevenDaysAgo)
 		}
-	}
+    }
 
     const nextHandler = ()=>{
 		if(isMonthlyView){
