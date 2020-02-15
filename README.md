@@ -18,7 +18,9 @@ npm start
 
 ## Folder Structure
 
-# 문제 해결 전략 
+
+## 
+
 [x] Event 데이터 모델 설계 
     ```
     Event { 
@@ -47,4 +49,5 @@ npm start
     [x] 월/주 단위 달력
     [ ] Event 추가/삭제/수정
         [ ] Event 추가/수정 시 날짜/시간 중복 여부의 확인
-    [ ] Event dragNdrop
+    [x] Event dragNdrop
+
