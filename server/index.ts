@@ -7,7 +7,6 @@ import {Routes} from "./routes";
 import Bundler from 'parcel-bundler'
 import path from 'path';
 import proxy from 'http-proxy-middleware'
-import { User } from "./entity/User";
 
 createConnection().then(async connection => {
 

@@ -17,8 +17,35 @@ npm start
 
 ### Folder Structure
 ```
-client          
-server
+.
+│   index.html              # parcel 빌드의 진입 파일 
+│   README.md               
+│   ormconfig.json          
+│   tsconfig.json
+│
+└─── client                 # 클라이언트 소스 (React) 
+│   │
+│   └─── components         # 화면 요소 
+│   │  
+│   └─── context            # context 및 reducer 구현 
+│   │   │   EventContext    # 일정 데이터의 CRUD action 및 서버 연동
+│   │   │   PopupContext    # 일정 추가/수정 팝업 open/close
+│   │   │   ViewContext     # 현재 뷰 타입(월,주 달력)
+│   │   
+│   └─── types              # 자주 사용되는 타입 정의 
+│   └─── utils              # 자주 사용되는 유틸성 함수
+│      
+│   
+└───server                  # 백앤드 소스
+    │   index.ts            # 
+    │   routes.ts           # REST API와 컨트롤러 연결 설정 
+    │  
+    └─── controller         # 데이터 컨트롤러 
+    │   │   Event.ts        
+    │     
+    └─── entity             # 모델 설계
+        │   Event.ts        
+
 ```
 
 
