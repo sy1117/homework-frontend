@@ -22,7 +22,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
     let _currentDate = new Date( (new Date(year, month, 1)) - MILLISECS_IN_DAY * (_startDay))
     
     const THead = ()=>(
-        <>
+        <thead>
             <tr className={"weekdays"}>
                 <th scope="col">Sunday</th>
                 <th scope="col">Monday</th>
@@ -32,7 +32,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
                 <th scope="col">Friday</th>
                 <th scope="col">Saturday</th>
             </tr>
-        </>
+        </thead>
     )     
 
     
@@ -78,7 +78,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
                     }
                 </div>
                 {_currentEvents.length 
-                    ? _currentEvents.map(item=><Event data={item}/>
+                    ? _currentEvents.map(item=><Event data={item} key={`event--${item.id}`}/>
                     :''
                 }
             </td>
@@ -89,7 +89,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
         <tbody>
             {[0,1,2,3,4].map((week)=>( 
                 <tr className={"days"} key={week}>
-                    {[0,1,2,3,4,5,6].map((day)=><TDateCell week={week} day={day}/>)}
+                    {[0,1,2,3,4,5,6].map((day)=><TDateCell week={week} day={day} key={`monthly-${week}-${day}`}/>)}
                 </tr>
             ))}
         </tbody>

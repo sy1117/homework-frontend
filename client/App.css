@@ -10,7 +10,7 @@ body {
   grid-template-columns: repeat(7, 1fr);
 }
 
-#calendar tr, #calendar tbody {
+#calendar tr, #calendar tbody, #calendar thead {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(7, 1fr);

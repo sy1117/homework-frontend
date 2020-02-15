@@ -12,9 +12,13 @@ const AppContainer: React.SFC = ()=>{
     const { event, dispatch } = useContext(EventContext);
     const { isShown } = useContext(PopupContext)
 
-    useEffect(async ():Promise<any> => {
-        await getEvents(dispatch)
-    }, [dispatch])
+    useEffect(() => {
+        async function fetchData() {
+            await getEvents(dispatch)
+        }
+        fetchData();
+    }, [dispatch]); // Or [] if effect doesn't need props or state
+    
 
     /**
      * Event Context

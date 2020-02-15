@@ -55,7 +55,7 @@ const MonthlyContainer:React.SFC = ()=>{
 
     return (
         <MonthlyPresenter 
-            data = {event.data}
+            data = {event?.data}
             currentDate={currentDate} 
             onClickDate={dateClickHandler}
             onDrop={dropHandler} 

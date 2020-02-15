@@ -10,7 +10,7 @@
 		"@types/dotenv": "^8.2.0",
 		"@types/express": "^4.17.2",
 		"@types/http-proxy-middleware": "^0.19.3",
-		"@types/jest": "^24.0.0",
+		"@types/jest": "^25.1.2",
 		"@types/node": "^12.0.0",
 		"@types/react": "^16.9.0",
 		"@types/react-dom": "^16.9.0",
@@ -26,12 +26,14 @@
 		"react-scripts": "3.3.1",
 		"reflect-metadata": "^0.1.13",
 		"sqlite3": "^4.0.3",
+		"ts-jest": "^25.2.0",
 		"ts-node": "^8.6.2",
 		"typeorm": "0.2.22",
 		"typescript": "~3.7.2"
 	},
 	"scripts": {
-		"start": "ts-node server/index"
+		"start": "ts-node server/index",
+		"test": "jest"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -49,6 +51,30 @@
 		]
 	},
 	"devDependencies": {
-		"@types/parcel-bundler": "^1.12.1"
+		"@types/parcel-bundler": "^1.12.1",
+		"react-test-renderer": "^16.12.0"
+  },
+  "jest": {
+	"globals": {
+		"ts-jest": {
+		  "diagnostics": false
+		}
+	},
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+	],
+	"moduleNameMapper": {
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+		"\\.(css|less)$": "identity-obj-proxy"
 	}
+  }
 }
