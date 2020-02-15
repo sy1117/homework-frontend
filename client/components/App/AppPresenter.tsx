@@ -13,11 +13,13 @@ interface IProps {
 const AppPresenter : React.SFC<IProps>= ({viewType, popupShown})=>{
 
     return (
+    <div>
         <table id={"calendar"}>
             <Control/>
             {viewType === ViewType.MONTHLY ? <Monthly/> : <Weekly/>}
-            {popupShown && <EventPopup/>}
         </table>
+        {popupShown && <EventPopup/>}
+    </div>
     )
 }
     

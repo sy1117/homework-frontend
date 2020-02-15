@@ -26,9 +26,11 @@ const PopupContainer : React.SFC = ({})=>{
     }
 
     const deleteHandler = async(e, formData)=>{
-        let { id } = formData;
-        await deleteEvent(id)(dispatch);
-        close();
+        if(confirm("일정을 삭제하시겠습니까?")){
+            let { id } = formData;
+            await deleteEvent(id)(dispatch);
+            close();
+        }
     }
 
 

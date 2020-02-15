@@ -20,3 +20,16 @@
 	background: white; 
 	padding: 40px; 
 }
+
+.popup_inner div{
+	margin-top: 1rem;
+}
+
+.popup_btn_area {
+	text-align: center;
+}
+
+.popup_btn_area button{
+	margin : 1rem 0.1rem;
+}
+
