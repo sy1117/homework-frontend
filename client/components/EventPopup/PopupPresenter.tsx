@@ -36,7 +36,7 @@ const PopupPresenter : React.SFC<IProps> = ({
     const formRef = useRef<HTMLFormElement>();
     const saveButtonRef = useRef<HTMLFormElement>();
 
-    const updateField = (e :React.SyntheticEvent)=> {
+    const updateField:React.ChangeEventHandler = (e)=> {
         if(onDataChange) onDataChange(e);
         setFormData({
             ...formData,

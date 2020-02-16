@@ -47,7 +47,10 @@ const EventAction =  {
     DELETE_EVENT_SUCCESS : 'DELETE_EVENT_SUCCESS',
     DELETE_EVENT_ERROR : 'DELETE_EVENT_ERROR',
 }
-export const EventContext = React.createContext(initialState);
+export const EventContext = React.createContext({
+    event: initialState,
+    dispatch: null,
+});
 
 export const EventReducer = (state, action)=>{
     switch (action.type) {

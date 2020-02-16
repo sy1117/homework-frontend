@@ -12,7 +12,7 @@ const PopupContainer : React.SFC = ({})=>{
         data,
         open,
         close,
-    } = useContext(PopupContext)
+    }:{isShown:boolean, data:any, open:Function, close:Function} = useContext(PopupContext)
 
     let {id, title, datetime} = data;
     let dateObj = new Date(datetime);

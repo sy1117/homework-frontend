@@ -10,7 +10,7 @@ const MonthlyContainer:React.SFC = ()=>{
     const { event , dispatch }:{event:any, dispatch:any} = useContext(EventContext);
     const { open : openPopup} = useContext(PopupContext);
 
-    const dropHandler = async (e:DragEvent)=>{
+    const dropHandler:React.DragEventHandler = async (e)=>{
         e.preventDefault();
 
         let data = JSON.parse(e.dataTransfer.getData('text'))
@@ -34,18 +34,18 @@ const MonthlyContainer:React.SFC = ()=>{
          * 날짜 확인
          */
         let result = confirm(`${year}/${parseInt(month)+1}/${date}로 일정을 옮기시겠습니까?`);
-        let datetime = new Date(year,month,date,hours).toISOString();
+        let changedDatetime = new Date(year,month,date,hours).toISOString();
 
         if(result){
-            modifyEvent(id, { datetime })(dispatch)
+            modifyEvent(id, { datetime: changedDatetime })(dispatch)
         }
     }
 
-    const dragOverHandler = (e)=>{
+    const dragOverHandler:React.DragEventHandler = (e)=>{
         e.preventDefault();
     }
 
-    const dateClickHandler = (e)=>{
+    const dateClickHandler:React.MouseEventHandler = (e)=>{
         let {currentTarget:{dataset:{year,month,date}}} = e;
         let currentDate = new Date(year,month,date);
         // 현재 시간을 기본 시간으로 선택

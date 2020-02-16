@@ -5,10 +5,10 @@ import Event from '../EventItem'
 
 interface IProps {
     currentDate: Date,
-    onDragOver : Function,
-    onCellClick: Function,
-    onDrop:Funtion,
-    data: Array,
+    onCellClick: React.MouseEventHandler,
+    onDragOver : React.DragEventHandler,
+    onDrop: React.DragEventHandler,
+    data: Array<any>,
 }
 
 const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onCellClick, onDragOver, onDrop})=>{
@@ -45,9 +45,9 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onCellClick, on
         let _currentYearInt = _currentDate.getFullYear();
         let _currentMonthInt = _currentDate.getMonth();
         let _currentDateInt = _currentDate.getDate();
-        let _currentHoursInt = parseInt(hours);
+        let _currentHoursInt = parseInt(hours+"");
 
-        let _currentEvents = false;
+        let _currentEvents;
         if(data){
             _currentEvents = data.filter(item=>{
                 let dateObj = new Date( item.datetime);
@@ -72,7 +72,7 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onCellClick, on
                 onClick={onCellClick}
                 onDragOver={onDragOver} 
                 onDrop={onDrop}>
-                    {_currentEvents.length ?
+                    {_currentEvents?.length ?
                          _currentEvents.map(item=><Event data={item} key={item.id}/>)
                         : ''
                     }

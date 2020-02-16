@@ -6,17 +6,17 @@ import { ViewContext } from '../../context/ViewContext'
 
 interface IProps {
     currentDate: Date,
-    onClickDate : Function,
-    onDragOver : Function,
-    onDrop:Funtion,
-    data: Array,
+    onClickDate : React.MouseEventHandler,
+    onDragOver : React.DragEventHandler,
+    onDrop: React.DragEventHandler,
+    data: Array<any>,
 }
 
 const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDate, onDrop, data})=>{
 
     const VISABLE_WEEKS = 5;
     const MILLISECS_IN_DAY = 1000 * 60 * 60 * 24;
-    let year = currentDate.getFullYear(), month = currentDate.getMonth()
+    let year:number = currentDate.getFullYear(), month:number = currentDate.getMonth()
 
     let _startDay = (new Date(year, month)).getDay();
     let _currentDate = new Date( (new Date(year, month, 1)) - MILLISECS_IN_DAY * (_startDay))
@@ -45,7 +45,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
 
 
         // [todo] filtering 개선
-        let _currentEvents = false;
+        let _currentEvents;
         if(data){
             _currentEvents = data.filter((item)=>{
                 let dateObj = new Date(item.datetime);
@@ -77,7 +77,7 @@ const MonthlyPresenter : React.SFC<IProps>= ({currentDate, onDragOver, onClickDa
                         : _currentDateInt
                     }
                 </div>
-                {_currentEvents.length 
+                {_currentEvents?.length 
                     ? _currentEvents.map(item=><Event data={item} key={`event--${item.id}`}/>)
                     :''
                 }

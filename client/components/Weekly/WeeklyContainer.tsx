@@ -9,7 +9,7 @@ const WeeklyContainer = ()=>{
     const { event , dispatch }:{event:any, dispatch:any} = useContext(EventContext);
     const { currentDate } = useContext(ViewContext);
 
-    const dropHandler = (e)=>{
+    const dropHandler : React.DragEventHandler= (e)=>{
         
         let data = JSON.parse(e.dataTransfer.getData('text')) 
         let { id } = data;
@@ -29,7 +29,7 @@ const WeeklyContainer = ()=>{
         }
     }
 
-    const cellClickHandler = (e)=>{
+    const cellClickHandler: React.MouseEventHandler = (e)=>{
         let {currentTarget:{dataset:{year,month,date,hours}}} = e;
         let currentDate = new Date(year,month,date,hours);
         // 현재 시간을 기본 시간으로 선택

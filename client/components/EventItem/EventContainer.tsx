@@ -8,11 +8,11 @@ const EventContainer =({data}:{data:any})=>{
     let { id, title, datetime } = data;
     const { open } = useContext(PopupContext);
 
-    const eventDragHandler = (e)=>{
+    const eventDragHandler :React.DragEventHandler = (e)=>{
         e.dataTransfer.setData('text', JSON.stringify(data))
     }
 
-    const eventClickHandler = (e)=>{
+    const eventClickHandler : React.MouseEventHandler= (e)=>{
         e.preventDefault();
         e.stopPropagation();
         open(data);

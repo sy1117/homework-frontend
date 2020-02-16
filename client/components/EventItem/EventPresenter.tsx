@@ -3,8 +3,8 @@ import React from 'react'
 interface IProps {
     datetime: Date,
     title: string,
-    onDragStart: Function,
-    onClick :Function,
+    onDragStart: React.DragEventHandler,
+    onClick : React.MouseEventHandler,
 }
 
 const EventPresenter: React.SFC<IProps> = ({datetime, title, onDragStart, onClick}) => {

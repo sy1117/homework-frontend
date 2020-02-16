@@ -19,7 +19,8 @@ npm test
 ## 개발 환경 
 * Frontend
     * React
-    * Parcel 
+    * Parcel
+    * axios 
 * Backend
     * Sqlite
     * TypeORM
