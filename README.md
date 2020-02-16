@@ -27,6 +27,13 @@
     * TypeORM
     * Express
 
+* Browser Support
+    * Chrome
+    * Firefox
+    * Safari
+    - IE, IE Edge 에서는 다르게 보일 수 있음
+
+
 ### Folder Structure
 ```
 .
