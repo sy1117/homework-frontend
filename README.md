@@ -2,19 +2,18 @@
 
 ## 설치 및 실행 방법
 * 실행
-```
-npm install
-npm start
-```
-* 개발 모드
-    - hmd 적용
-```
-npm dev
-```
-* 단위 테스트
-```
-npm test
-```
+    ```
+    npm install
+    npm start
+    ```
+* 개발 모드(Hot Module Reload 적용
+    ```
+    npm dev
+    ```
+* 단위 테스트 수행
+    ```
+    npm test
+    ```
 
 ## 개발 환경 
 * Frontend
