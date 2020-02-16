@@ -36,7 +36,7 @@ const PopupPresenter : React.SFC<IProps> = ({
     const formRef = useRef<HTMLFormElement>();
     const saveButtonRef = useRef<HTMLFormElement>();
 
-    const updateField:React.ChangeEventHandler = (e)=> {
+    const updateField:React.ChangeEventHandler = (e:React.ChangeEvent<HTMLInputElement>)=> {
         if(onDataChange) onDataChange(e);
         setFormData({
             ...formData,
@@ -63,8 +63,7 @@ const PopupPresenter : React.SFC<IProps> = ({
                         value={formData.title}
                         onChange={updateField}
                         required
-                        size={"50"}/><br/>
-
+                        size={50}/><br/>
                     <div>
                         <label htmlFor="popup_date">날짜 및 시간</label>
                     </div>
@@ -82,14 +81,14 @@ const PopupPresenter : React.SFC<IProps> = ({
                             name={"hours"} 
                             onChange={updateField}
                             value={formData.hours}>
-                            {[0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+                            {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
                                 .map(item=>
                                     // <option value={item}>{item%12===0? item:item%12}</option>
                                     <option value={item} key={item}>{item}</option>
                                 )
                             }
                         </select>
-                        ~ {(parseInt(formData.hours)+1) 시
+                        ~ {(parseInt(formData.hours+"")+1)} 시
                     </div>
                     <div className="error_message">
                         {errorMessage}

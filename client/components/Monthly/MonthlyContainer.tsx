@@ -10,7 +10,7 @@ const MonthlyContainer:React.SFC = ()=>{
     const { event , dispatch }:{event:any, dispatch:any} = useContext(EventContext);
     const { open : openPopup} = useContext(PopupContext);
 
-    const dropHandler:React.DragEventHandler = async (e)=>{
+    const dropHandler:React.DragEventHandler = async (e:React.DragEvent<HTMLElement>)=>{
         e.preventDefault();
 
         let data = JSON.parse(e.dataTransfer.getData('text'))
@@ -34,20 +34,20 @@ const MonthlyContainer:React.SFC = ()=>{
          * 날짜 확인
          */
         let result = confirm(`${year}/${parseInt(month)+1}/${date}로 일정을 옮기시겠습니까?`);
-        let changedDatetime = new Date(year,month,date,hours).toISOString();
+        let changedDatetime = new Date(parseInt(year),parseInt(month),parseInt(date),hours).toISOString();
 
-        if(result){
-            modifyEvent(id, { datetime: changedDatetime })(dispatch)
-        }
+        let res = await modifyEvent(id, { datetime: changedDatetime })(dispatch)
+        if(!res) alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
+
     }
 
     const dragOverHandler:React.DragEventHandler = (e)=>{
         e.preventDefault();
     }
 
-    const dateClickHandler:React.MouseEventHandler = (e)=>{
+    const dateClickHandler:React.MouseEventHandler = (e:React.MouseEvent<HTMLInputElement>):void=>{
         let {currentTarget:{dataset:{year,month,date}}} = e;
-        let currentDate = new Date(year,month,date);
+        let currentDate = new Date(parseInt(year),parseInt(month),parseInt(date));
         // 현재 시간을 기본 시간으로 선택
         // currentDate.setHours(new Date().getHours())
         openPopup({datetime: currentDate.toISOString()});

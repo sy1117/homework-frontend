@@ -5,7 +5,7 @@ export const ViewContext = React.createContext({
     currentDate : new Date(),
     viewType : ViewType.MONTHLY,
     changeView : ()=>{},
-    changeDate: ()=>{},
+    changeDate: (date:Date):void=>{},
     isMonthlyView : ()=>{}
 });
 
