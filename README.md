@@ -6,15 +6,17 @@
     npm install
     npm start
     ```
+    * http://localhost:8080 접속 
+
 * 개발 모드(Hot Module Reload 적용
     ```
     npm dev
     ```
+    * http://localhost:8080 접속 
 * 단위 테스트 수행
     ```
     npm test
     ```
-* http://localhost:8080 접속 
 
 ## 개발 환경 
 * Frontend
@@ -193,7 +195,7 @@
     - 따라서 서버에 요청을 보내고, 그에 대한 응답 코드를 통해 중복 여부 확인 및 처리 
         - 정상 => `Status Code: 200 Ok`
         - 중복된 일정인 경우 => (`Status Code: 409 Conflict`)
-    - 드래그&드랍을 통한 일정 이동일 경우에는, 해당 칸(td)에 이벤트가 있는지 querySelector로 확인 후 서버에서 또 한번 체크하게 구현
+    - 드래그&드랍을 통한 일정 이동일 경우에는, 해당 칸(td)에 이벤트가 있는지 querySelector로 확인 후 서버 전달
 
 
 * [x] Enzyme/Jest 기반의 컴포넌트 단위 테스트 작성
