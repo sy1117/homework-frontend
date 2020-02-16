@@ -10,7 +10,7 @@ import { yyyymmdd } from '../../utils/Date';
 
 describe('<Monthly />', () => {
 
-    it('날짜 칸 클릭 시, 팝업 오픈 및 팝업 데이터 확인', () => {
+    it('날짜 칸 클릭 시, 팝업 오픈', () => {
         const wrapper = mount(
             <PopupProvider>
                 <EventProvider>
@@ -22,7 +22,7 @@ describe('<Monthly />', () => {
         );
 
         // data binding
-        // expect(wrapper.find('.popup').exists()).toBeFalsy()
+        expect(wrapper.find('.popup').exists()).toBeFalsy()
         const day =  wrapper.find("td.day").at(0);
         let clickedYear = day.prop('data-year');
         let clickedMonth = day.prop('data-month');
