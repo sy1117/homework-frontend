@@ -85,8 +85,8 @@
         @CreateDateColumn() createdAt: string;
     }
     ```
-    - id 는 TypeORM decorator @PrimaryGeneratedColumn 를 사용하여, identifier 의 역할 한다.
-    - datetime 컬럼을 @Unique 컬럼으로 지정하여, 중복된 날짜/시간을 가진 일정을 추가되지 못하도록 하였다. 
+    - id 는 TypeORM 데코레이터 @PrimaryGeneratedColumn 를 사용하여, identifier의 역할 한다.
+    - datetime 컬럼을 @Unique 데코레이터를 사용하여, 중복된 날짜/시간을 가진 일정을 추가되지 못하도록 제약 조건 구성
 
 * [x] Backend REST API 구성 
     - Backend + Frontend 을 하나의 Express 서버로 구성하였으며,
@@ -159,22 +159,17 @@
                 - EventItem 을 클릭할 경우, `open` 함수 호출 시, 해당 object 를 인자로 전달
                 - Monthly/Weekly 의 td 클릭 시, `open` 함수 호출 시, 해당하는 날짜 및 시간을 데이터를 object 로 생성하여 인자로 전달
             - 팝업의 구분
-                - *새 일정*
-                    - `data.id` 속성을 있는 경우
-                    - 취소/저장 버튼을 가진다
-                - *일정 편집* 
-                    - `data.id` 속성이 없는 경우
-                    - 취소/삭제/저장 버튼을 가진다
+                - *새 일정* : `data.id` 속성이 있는 경우, 취소/저장 버튼을 가진다
+                - *일정 편집* : `data.id` 속성이 없는 경우, 취소/삭제/저장 버튼을 가진다
             
 
     - client/componets 하위에 컴포넌트 이름의 폴더(ex. `client/components/Monthly`) 로 구성되어 있으며, _Container + Pressenter Pattern_ 으로 개발함
-        - Container 는 기능(logic), 데이터 연동과 관계 있으며
-        - Presenter 은 prop에 따른 표현 방식과 관계 있음
-        - 기능과 표현이 구분되어 있어 선호하는 방식이다.   
+        - Container 는 기능(logic), 데이터 연동과 관계 있으며, Presenter 은 prop에 따른 표현 방식과 관계 있음
+        - 기능과 표현을 구분하여 개발하는 패턴
 
 
 * [x] Reducer 를 통한 '일정' 컨텍스트 관리 
-    - 과제의 요건에서 애플리케이션의 다중 접근에 대해서는 명시되어 있지 않아, 현재 애플리케이션에서는 단일 접근만 발생한다고 가정하였다.
+    - 과제의 요건에서 애플리케이션의 다중 접근에 대해서는 명시되어 있지 않아, 현재 애플리케이션에서는 단일 접근만 발생한다고 가정
         - 새 창으로 페이지를 띄워 일정 추가/삭제/수정을 할 경우, 원래 띄워 있던 화면은 새로고침 없이는 데이터가 변경이 보이지 않음
         - 실시간으로 반영되고자 할 경우, socket 통신으로 추가 구현 필요 
     - reducers
@@ -193,8 +188,8 @@
 * [x] Enzyme/Jest 기반의 컴포넌트 단위 테스트 작성
     - Container 안에서 컨텍스트 값을 참조하도록 개발되어 있어서,
     컨텍스트 선언 없이는 컴포넌트 렌더링이 불가능했다.
-    - 일정 데이터를 관리하기 위해, React Context 안에 state와 dispatch 를 넣고 사용하고 잇었는데 이 부분으로 인해 단위 테스트 작성에 어려움이 있었다. 
-    - 단위 테스트를 개발 완료 후에 작성한 부분이 아쉬운 점이다. 
+    - 일정 데이터를 관리하기 위해, React Context 안에 state와 dispatch 를 넣고 사용하고 었는데 이 부분으로 인해 단위 테스트 작성에 어려움이 있었음
+    - 단위 테스트를 개발 완료 후에 작성한 부분이 아쉬운 부분임 
 
 
 
