@@ -23,7 +23,7 @@ const WeeklyContainer = ()=>{
         
         let result = confirm(`'${year}/${parseInt(month)+1}/${date} ${hours}시'로 일정을 옮기시겠습니까?`);
 
-        let datetime =new Date(year, month, date, hours).toISOString()
+        let datetime = new Date(year, month, date, hours).toISOString()
         if(result){
             modifyEvent(id, { datetime })(dispatch)
         }
@@ -43,7 +43,7 @@ const WeeklyContainer = ()=>{
     return (
     <WeeklyPresenter 
         currentDate = {currentDate}
-        data = { event.data }
+        data = { event?.data }
         onCellClick={cellClickHandler}
         onDragOver={dragOverHandler} 
         onDrop={dropHandler}/>

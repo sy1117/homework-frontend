@@ -30,12 +30,20 @@ const ControlPresenter = ({
     return (
     <table id={"calendar"}>
         <caption>
-            <button onClick={onPrevHandler}>&lt;</button>
+            <button data-testid="btn-prev" onClick={onPrevHandler}>&lt;</button>
             {isMonthlyView
-                ?`${MonthList[month]} ${year}`
-                : `${yyyymmdd(firstday)} ~ ${yyyymmdd(lastday)}`
+                ?(
+                <>
+                    <span data-testid="span-current-month">{MonthList[month]}</span>&nbsp;
+                    <span data-testid="span-current-year">{year}</span>
+                </>
+                ): (
+                <>
+                    <span data-testid="span-weekly-startdate">{yyyymmdd(firstday)}</span>~ 
+                    <span data-testid="span-weekly-enddate">{yyyymmdd(lastday)}</span>
+                </>)
             }
-            <button onClick={onNextHandler}>&gt;</button>
+            <button data-testid="btn-next" onClick={onNextHandler}>&gt;</button>
             <div className={"view-toggle"}>
                 <button data-testid="btn-monthly" onClick={onChangeView} disabled={viewType == ViewType.MONTHLY}>월</button>
                 <button data-testid="btn-weekly" onClick={onChangeView} disabled={viewType == ViewType.WEEKLY}>주</button>
