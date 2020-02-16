@@ -155,7 +155,19 @@
             - Weekly : 주 달력 컴포넌트 
         - EventItem : 월/주 달력 칸 안에 표시되는 일정 컴포넌트
         - EventPopup : 일정 추가/수정/삭제를 위한 팝업
-    - client/componets 하위에 컴포넌트 이름의 폴더(ex. `client/components/Monthly`) 로 구성되어 있으며, _Container + Pressenter Pattern_ 으로 개발하였음
+            - 팝업 open 시나리오 
+                - EventItem 을 클릭할 경우, `open` 함수 호출 시, 해당 object 를 인자로 전달
+                - Monthly/Weekly 의 td 클릭 시, `open` 함수 호출 시, 해당하는 날짜 및 시간을 데이터를 object 로 생성하여 인자로 전달
+            - 팝업의 구분
+                - *새 일정*
+                    - `data.id` 속성을 있는 경우
+                    - 취소/저장 버튼을 가진다
+                - *일정 편집* 
+                    - `data.id` 속성이 없는 경우
+                    - 취소/삭제/저장 버튼을 가진다
+            
+
+    - client/componets 하위에 컴포넌트 이름의 폴더(ex. `client/components/Monthly`) 로 구성되어 있으며, _Container + Pressenter Pattern_ 으로 개발함
         - Container 는 기능(logic), 데이터 연동과 관계 있으며
         - Presenter 은 prop에 따른 표현 방식과 관계 있음
         - 기능과 표현이 구분되어 있어 선호하는 방식이다.   
