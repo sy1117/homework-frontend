@@ -34,10 +34,11 @@ const MonthlyContainer:React.SFC = ()=>{
          * 날짜 확인
          */
         let result = confirm(`${year}/${parseInt(month)+1}/${date}로 일정을 옮기시겠습니까?`);
-        let changedDatetime = new Date(parseInt(year),parseInt(month),parseInt(date),hours).toISOString();
-
-        let res = await modifyEvent(id, { datetime: changedDatetime })(dispatch)
-        if(!res) alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
+        if(result){
+            let changedDatetime = new Date(parseInt(year),parseInt(month),parseInt(date),hours).toISOString();
+            let res = await modifyEvent(id, { datetime: changedDatetime })(dispatch)
+            if(!res) alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
+        }            
 
     }
 
