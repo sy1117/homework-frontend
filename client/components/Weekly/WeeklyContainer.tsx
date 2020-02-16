@@ -19,7 +19,10 @@ const WeeklyContainer = ()=>{
         /**
          * 같은 시간에 이벤트가 있는 경우, 이동 x
          */
-        if(e.currentTarget.children.length) return false;
+        if(e.currentTarget.children.length) {
+            alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
+            return false;
+        }
         
         let result = confirm(`'${year}/${parseInt(month)+1}/${date} ${hours}시'로 일정을 옮기시겠습니까?`);
 

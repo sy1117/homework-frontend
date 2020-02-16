@@ -64,7 +64,7 @@ const WeeklyPresenter : React.SFC<IProps> = ({data, currentDate, onCellClick, on
         return(
             <td 
                 scope="col" 
-                className={"day"} 
+                className={"time"} 
                 data-year ={_currentYearInt}
                 data-month = {_currentMonthInt}
                 data-date = {_currentDateInt}
