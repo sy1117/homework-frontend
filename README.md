@@ -179,10 +179,11 @@ npm test
         - 정상 => `Status Code: 200 Ok`
         - 중복된 일정인 경우 => (`Status Code: 409 Conflict`)
 
-* [x] 컴포넌트 단위 테스트 
-    - Enzyme/Jest 기반의 단위 테스트 작성하였다.
+* [x] Enzyme/Jest 기반의 컴포넌트 단위 테스트 작성
     - Container 안에서 컨텍스트 값을 참조하도록 개발되어 있어서,
-    mount(shallow, render) 시 ContextProvider 을 상위에 함께 선언해주어야 했다. 
+    컨텍스트 선언 없이는 컴포넌트 렌더링이 불가능했다.
+    - 일정 데이터를 관리하기 위해, React Context 안에 state와 dispatch 를 넣고 사용하고 잇었는데 이 부분으로 인해 단위 테스트 작성에 어려움이 있었다. 
+    - 단위 테스트를 개발 완료 후에 작성한 부분이 아쉬운 점이다. 
 
 
 
