@@ -14,6 +14,7 @@
     ```
     npm test
     ```
+* http://localhost:8080 접속 
 
 ## 개발 환경 
 * Frontend
@@ -86,7 +87,7 @@
     }
     ```
     - id 는 TypeORM 데코레이터 @PrimaryGeneratedColumn 를 사용하여, identifier의 역할 한다.
-    - datetime 컬럼을 @Unique 데코레이터를 사용하여, 중복된 날짜/시간을 가진 일정을 추가되지 못하도록 제약 조건 구성
+    - datetime 컬럼을 @Unique 데코레이터를 사용하여, 중복된 날짜/시간을 가진 일정이 추가되지 못하도록 제약 조건 구성
 
 * [x] Backend REST API 구성 
     - Backend + Frontend 을 하나의 Express 서버로 구성하였으며,
@@ -159,8 +160,8 @@
                 - EventItem 을 클릭할 경우, `open` 함수 호출 시, 해당 object 를 인자로 전달
                 - Monthly/Weekly 의 td 클릭 시, `open` 함수 호출 시, 해당하는 날짜 및 시간을 데이터를 object 로 생성하여 인자로 전달
             - 팝업의 구분
-                - *새 일정* : `data.id` 속성이 있는 경우, 취소/저장 버튼을 가진다
-                - *일정 편집* : `data.id` 속성이 없는 경우, 취소/삭제/저장 버튼을 가진다
+                - *새 일정* : `data.id` 속성이 없는 경우, 취소/저장 버튼을 가진다
+                - *일정 편집* : `data.id` 속성이 있는 경우, 취소/삭제/저장 버튼을 가진다
             
 
     - client/componets 하위에 컴포넌트 이름의 폴더(ex. `client/components/Monthly`) 로 구성되어 있으며, _Container + Pressenter Pattern_ 으로 개발함
