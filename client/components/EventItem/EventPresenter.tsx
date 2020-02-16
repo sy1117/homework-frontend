@@ -14,6 +14,7 @@ const EventPresenter: React.SFC<IProps> = ({datetime, title, onDragStart, onClic
             className="event" 
             draggable={true} 
             onClick={onClick}
+            data-hours={hours}
             onDragStart={onDragStart} 
             >
             <div className="event-time">

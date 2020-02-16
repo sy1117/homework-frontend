@@ -29,6 +29,13 @@ const MonthlyContainer:React.SFC = ()=>{
             originDate.getFullYear()== parseInt(year)
         ) return false;
 
+        /**
+         * 이동하는 날짜와 시간에 이벤트가 있는 경우
+         */
+        if(e.currentTarget.querySelector(`.event[data-hours='${hours}']`)){
+            alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
+            return false;
+        }
 
         /**
          * 날짜 확인
