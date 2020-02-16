@@ -9,7 +9,7 @@ const WeeklyContainer = ()=>{
     const { event , dispatch }:{event:any, dispatch:any} = useContext(EventContext);
     const { currentDate } = useContext(ViewContext);
 
-    const dropHandler : React.DragEventHandler= (e:React.DragEvent<HTMLElement>)=>{
+    const dropHandler : React.DragEventHandler= async (e:React.DragEvent<HTMLElement>)=>{
         
         let data = JSON.parse(e.dataTransfer.getData('text')) 
         let { id } = data;
@@ -23,13 +23,12 @@ const WeeklyContainer = ()=>{
             alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
             return false;
         }
-        
-        let result = confirm(`'${year}/${parseInt(month)+1}/${date} ${hours}시'로 일정을 옮기시겠습니까?`);
 
-        let datetime = new Date(parseInt(year), parseInt(month), parseInt(date), parseInt(hours)).toISOString()
-        if(result){
-            modifyEvent(id, { datetime })(dispatch)
-        }
+        if(confirm(`'${year}/${parseInt(month)+1}/${date} ${hours}시'로 일정을 옮기시겠습니까?`)){
+            let changedDatetime = new Date(parseInt(year), parseInt(month), parseInt(date), parseInt(hours)).toISOString()
+            let res = await modifyEvent(id, { datetime: changedDatetime })(dispatch)
+            if(!res) alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
+        }            
     }
 
     const cellClickHandler: React.MouseEventHandler = (e:React.MouseEvent<HTMLElement>)=>{

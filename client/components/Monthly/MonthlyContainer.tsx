@@ -23,18 +23,17 @@ const MonthlyContainer:React.SFC = ()=>{
          */
         let originDate = new Date(datetime);
         let hours = originDate.getHours();
-
         if(
             originDate.getDate()==parseInt(date) && 
             originDate.getMonth()==parseInt(month) && 
             originDate.getFullYear()== parseInt(year)
         ) return false;
-        
+
+
         /**
          * 날짜 확인
          */
-        let result = confirm(`${year}/${parseInt(month)+1}/${date}로 일정을 옮기시겠습니까?`);
-        if(result){
+        if(confirm(`${year}/${parseInt(month)+1}/${date}로 일정을 옮기시겠습니까?`)){
             let changedDatetime = new Date(parseInt(year),parseInt(month),parseInt(date),hours).toISOString();
             let res = await modifyEvent(id, { datetime: changedDatetime })(dispatch)
             if(!res) alert("중복된 일정입니다. 일정을 옮길 수 없습니다")
