@@ -1,6 +1,12 @@
 # 웹개발 사전과제 (김소영)
 
 ## 설치 및 실행 방법
+
+* 모듈 설치 
+    ```
+    npm install -g parcel-bundler
+    npm install
+    ```
 * 실행
     ```
     npm install
@@ -10,6 +16,7 @@
 
 * 개발 모드(Hot Module Replactement) 적용
     ```
+    npm install
     npm dev
     ```
     * http://localhost:8080 접속 
