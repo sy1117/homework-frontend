@@ -8,7 +8,7 @@
     ```
     * http://localhost:8080 접속 
 
-* 개발 모드(Hot Module Reload 적용
+* 개발 모드(Hot Module Replactement) 적용
     ```
     npm dev
     ```
