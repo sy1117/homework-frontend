@@ -9,14 +9,12 @@
     ```
 * 실행
     ```
-    npm install
     npm start
     ```
     * http://localhost:8080 접속 
 
 * 개발 모드(Hot Module Replactement) 적용
     ```
-    npm install
     npm dev
     ```
     * http://localhost:8080 접속 
